@@ -78,12 +78,3 @@ let game = () => {
 }
  console.log(game())
 
-// let game = () => {
-//     for(let i = 0; i<rounds;i++){
-//         playerSelection = validatePlayerSelection(playerSelection);
-//         console.log(playRound(playerSelection));
-//         console.log(scoreBoard())
-//     }
-//     return scoreBoard()
-// }
-
