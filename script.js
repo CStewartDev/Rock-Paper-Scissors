@@ -3,17 +3,12 @@ let computerSelection;
 let rounds = 5;
 let compScore = 0;
 let playerScore = 0;
+let moves = ["ROCK","PAPER","SCISSORS"]
 
 
 let computerPlay = () => {
-    let comp = Math.floor(Math.random()*3) +1;
-    if(comp === 1) {
-        return "ROCK"
-    } else if(comp ===2) {
-        return "PAPER"
-    } else {
-        return "SCISSORS"
-    }
+    let comp = Math.floor(Math.random()*3);
+    return moves[comp]
 }
 
 let playRound = (playerSelection) => {
@@ -50,30 +45,33 @@ let playRound = (playerSelection) => {
             compScore++; 
             return "LOSER! Scissors cut Paper!"
         } else{"HMM. That ain't right. Try again"}
-    } else {return "HMMM, THat ain't right. Try Again."}
+    } else {return "HMMM, That ain't right. Try Again."}
 }
 
 let validatePlayerSelection = (playerSel) => {
-    while(playerSel !== "ROCK" ||playerSel !== "PAPER" ||playerSel !== "SCISSORS") {
-        playerSel = prompt("ROCK,PAPER,SCISSORS?")
-        playerSel=playerSel.toUpperCase()
-        if(playerSel === "ROCK" ||playerSel === "PAPER" ||playerSel === "SCISSORS")
-        return playerSel
-    }
+    let valid = 0;
+    do {
+        playerSel = prompt("ROCK,PAPER,SCISSORS?").toUpperCase();
+        if(playerSel === "ROCK" || playerSel === "PAPER" || playerSel === "SCISSORS") {
+            valid = 1;
+        }
+    return playerSel }
+    while(valid !== 1);
 }
 
 let scoreBoard = () => `The score is Player:${playerScore} Computer:${compScore}`
 
-let game = (playerSelection) => {
+let game = () => {
     for(let i = 0; i<rounds; i++){
-        playRound(playerSelection);
+        playerSelection = validatePlayerSelection(playerSelection);
+        console.log(playRound(playerSelection));
+        console.log(scoreBoard())
     }
-    scoreBoard()
+    return scoreBoard()
 }
 
 
 computerSelection = computerPlay()
-playerSelection = validatePlayerSelection(playerSelection);
 
-console.log(game(playerSelection))
-console.log(scoreBoard())
+
+console.log(game())
