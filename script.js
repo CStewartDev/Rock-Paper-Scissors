@@ -1,77 +1,85 @@
-let playerSelection;
-let computerSelection;
-let rounds = 5;
 let compScore = 0;
 let playerScore = 0;
-let moves = ["ROCK","PAPER","SCISSORS"]
+const SELECTIONS = [
+    {
+        name: 'ROCK',
+        beats: 'SCISSORS'
+    },
+    {
+        name: 'PAPER',
+        beats: 'ROCK'
+    },
+    {
+        name: 'SCISSORS',
+        beats: 'PAPER'
+    }
+]
 
-
-let computerPlay = () => {
-    let comp = Math.floor(Math.random()*3);
-    return moves[comp]
-}
-
-let playRound = (playerSelection) => {
-    let computerSelection = computerPlay();
-    playerSelection = playerSelection.toUpperCase();
-    computerSelection = computerSelection.toUpperCase();
-    if(playerSelection == "ROCK") {
-        if(computerSelection === "ROCK"){
-            return "Draw. Try again."
-        } else if(computerSelection == "SCISSORS") {
-            playerScore++;
-            return "WINNER! Rock Crushes Scissors!"
-        } else if(computerSelection == "PAPER"){
-            compScore++; 
-            return "Loser! Paper Covers Rock!"
-        } else{"HMM. That aint right. Try again"}
-    } else if(playerSelection =="SCISSORS"){
-        if(computerSelection === "SCISSORS"){
-            return "Draw. Try again"
-        } else if(computerSelection == "ROCK") {
-            compScore++;
-            return "LOSER! Rock Crushes Scissors!"
-        } else if(computerSelection == "PAPER"){
-            playerScore++ 
-            return "WINNER! Scissors cut Paper!"
-        } else{"HMM. That ain't right. Try again"}
-    } else if(playerSelection =="PAPER") {
-        if(computerSelection === "PAPER"){
-            return "Draw. Try again"
-        } else if(computerSelection == "ROCK") {
-            playerScore++;
-            return "WINNER! Paper Covers Rock!"
-        } else if(computerSelection == "SCISSORS"){
-            compScore++; 
-            return "LOSER! Scissors cut Paper!"
-        } else{"HMM. That ain't right. Try again"}
-    } else {return "HMMM, That ain't right. Try Again."}
-}
-
-let validatePlayerSelection = (playerSel) => {
+let validatePlayerSelection = () => {
     let valid = 0;
+    let playerSel;
     do {
         playerSel = prompt("ROCK,PAPER,SCISSORS?").toUpperCase();
         if(playerSel === "ROCK" || playerSel === "PAPER" || playerSel === "SCISSORS") {
             valid = 1;
+            return playerSel
         }
-    return playerSel }
-    while(valid !== 1);
+    } while(valid !== 1);
+}
+
+let randomSelection = () => {
+    let comp = Math.floor(Math.random()*SELECTIONS.length);
+    return SELECTIONS[comp]
+}
+
+let yourSelection = () => {
+    const validSelection = validatePlayerSelection();
+    const selection = SELECTIONS.find(selection=> selection.name === validSelection)
+    return selection;
+}
+
+let isWinner = (selection,opponentSelection) => selection.beats === opponentSelection.name
+
+let playround = () => {
+    let computerSelection = randomSelection();
+    let playerSelection = yourSelection();
+    const youWin = isWinner(playerSelection,computerSelection)
+    const pcWin = isWinner(computerSelection,playerSelection)
+    return result(playerSelection,youWin, computerSelection, pcWin)  
 }
 
 let scoreBoard = () => `The score is Player:${playerScore} Computer:${compScore}`
 
+let result = (playerSelection, youWin, computerSelection,pcWin) => {
+    if(youWin){
+        playerScore++
+        return `WINNER! ${playerSelection.name} Beats ${computerSelection.name}
+        ${scoreBoard()}`
+    } else if (pcWin){
+        compScore++
+        return `LOSER! ${computerSelection.name} Beats ${playerSelection.name}
+        ${scoreBoard()}`
+    } else if (youWin === false && pcWin === false){
+        return `Draw. Try again.
+        ${scoreBoard}` 
+    } else {"HMM. That aint right. Try again"}
+}
+
+console.log(playround())
+
 let game = () => {
-    for(let i = 0; i<rounds; i++){
-        playerSelection = validatePlayerSelection(playerSelection);
-        console.log(playRound(playerSelection));
-        console.log(scoreBoard())
+    for(let i = 0;i>5,i++){
+        console.log(playround())
     }
-    return scoreBoard()
 }
 
 
-computerSelection = computerPlay()
+// let game = () => {
+//     for(let i = 0; i<rounds;i++){
+//         playerSelection = validatePlayerSelection(playerSelection);
+//         console.log(playRound(playerSelection));
+//         console.log(scoreBoard())
+//     }
+//     return scoreBoard()
+// }
 
-
-console.log(game())
