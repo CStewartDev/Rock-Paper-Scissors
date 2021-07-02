@@ -1,5 +1,6 @@
 let compScore = 0;
 let playerScore = 0;
+let rounds = 5;
 const SELECTIONS = [
     {
         name: 'ROCK',
@@ -46,9 +47,9 @@ let playround = () => {
     const youWin = isWinner(playerSelection,computerSelection)
     const pcWin = isWinner(computerSelection,playerSelection)
     return result(playerSelection,youWin, computerSelection, pcWin)  
-}
+} 
 
-let scoreBoard = () => `The score is Player:${playerScore} Computer:${compScore}`
+let scoreBoard = (isFinal) => `The score is Player:${playerScore} Computer:${compScore}`
 
 let result = (playerSelection, youWin, computerSelection,pcWin) => {
     if(youWin){
@@ -60,19 +61,22 @@ let result = (playerSelection, youWin, computerSelection,pcWin) => {
         return `LOSER! ${computerSelection.name} Beats ${playerSelection.name}
         ${scoreBoard()}`
     } else if (youWin === false && pcWin === false){
+        rounds++;
         return `Draw. Try again.
-        ${scoreBoard}` 
-    } else {"HMM. That aint right. Try again"}
-}
-
-console.log(playround())
-
-let game = () => {
-    for(let i = 0;i>5,i++){
-        console.log(playround())
+        ${scoreBoard()}` 
+    } else {
+        rounds++
+        return "HMM. That aint right. Try again"
     }
 }
 
+let game = () => {
+    for(let i = 0;i<rounds;i++){
+        console.log(playround())
+    }
+    return `The FINAL score is Player:${playerScore} Computer:${compScore}`
+}
+ console.log(game())
 
 // let game = () => {
 //     for(let i = 0; i<rounds;i++){
