@@ -25,7 +25,7 @@ let validatePlayerSelection = () => {
             valid = 1;
             return playerSel;
         }
-    } while(valid >= 1 && playerSel);
+    } while(valid === 1 && playerSel);
 }
 
 let randomSelection = () => {
