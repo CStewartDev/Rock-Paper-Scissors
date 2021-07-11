@@ -24,7 +24,7 @@ let validatePlayerSelection = () => {
         if(playerSel === "ROCK" || playerSel === "PAPER" || playerSel === "SCISSORS") {
             valid = 1;
         }
-    } while(valid === 1 && playerSel);
+    } while(valid === 0 && playerSel);
     return playerSel;
 }
 
