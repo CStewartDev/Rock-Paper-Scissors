@@ -23,9 +23,9 @@ let validatePlayerSelection = () => {
         playerSel = prompt("ROCK,PAPER,SCISSORS?").toUpperCase();
         if(playerSel === "ROCK" || playerSel === "PAPER" || playerSel === "SCISSORS") {
             valid = 1;
-            return playerSel
+            return playerSel;
         }
-    } while(valid !== 1);
+    } while(valid !== 1 && playerSel);
 }
 
 let randomSelection = () => {
