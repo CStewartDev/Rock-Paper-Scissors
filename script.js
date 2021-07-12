@@ -78,3 +78,11 @@ let game = () => {
 }
  console.log(game())
 
+ //Time to make a GUI and clean up some of this behavior. NO MORE PROMPTS!!! YUS!
+ //Create element for each rock, paper,scissors
+ // each one can have a data attribute to identify them.
+ // add event listeners for player selection
+ // Add a scoreboard to show the matches
+ // show final score after 5 rounds have gone, excluding Draws.
+ 
+
