@@ -24,26 +24,17 @@ let randomSelection = () => {
 
 let isWinner = (selection,opponentSelection) => selection.beats === opponentSelection.name
 
-let scoreBoard = () => {
- (() => {if(playerScore === 5 || compScore ===5) final = true})()
-
-    if(final){
-        return `The final score is Player:${playerScore} Computer:${compScore}`
-    } else return `The score is Player:${playerScore} Computer:${compScore}`
+let finalScore = () => {
+    if(final) return `The final score is Player: ${playerScore} Computer: ${compScore}`
 }
-
+    
 let result = (playerSelection, youWin, computerSelection,pcWin) => {
         if(youWin){
-            playerScore++
-            return `WINNER! ${playerSelection.name} Beats ${computerSelection.name}
-            ${scoreBoard()}`
+            return `WINNER this round! ${playerSelection.name} Beats ${computerSelection.name}`
         } else if (pcWin){
-            compScore++
-            return `LOSER! ${computerSelection.name} Beats ${playerSelection.name}
-            ${scoreBoard()}`
+            return `LOSER this round! ${computerSelection.name} Beats ${playerSelection.name}`
         } else if (youWin === false && pcWin === false){;
-            return `Draw. Try again.
-            ${scoreBoard()}` 
+            return `Draw. Try again.` 
         } else { return ""
         }
 }
@@ -71,9 +62,15 @@ function removeTransition(e) {
 function makeSelection(selection) {
     const score = document.querySelector('.score')
     let computerSelection = randomSelection();
-    const youWin = isWinner(selection,computerSelection)
-    const pcWin = isWinner(computerSelection,selection) 
-    score.textContent = result(selection,youWin, computerSelection, pcWin)
+    const youWin = isWinner(selection,computerSelection);
+    const pcWin = isWinner(computerSelection,selection);
+    if(youWin) playerScore++
+    if(pcWin) compScore++ 
+    (() => {if(playerScore === 5 || compScore ===5) final = true})();
+    if(final) {
+        score.textContent = finalScore();
+    } else score.textContent = result(selection,youWin, computerSelection, pcWin);
+
     compSpan.textContent = compScore;
     yourSpan.textContent = playerScore;
 }

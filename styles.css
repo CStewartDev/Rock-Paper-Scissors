@@ -100,15 +100,16 @@ html {
 .btns{
     display: flex;
     align-items: center;
-    justify-content: center  
+    justify-content: center;
+    min-width: 100vw;  
 }
 
 .btn {
     border-radius: .5rem;
     margin: 1rem;
-    font-size: 15rem;
+    font-size: 15vw;
     padding: 1rem .5rem;
-    width: 30rem;
+    width: 20vw;
     cursor: pointer;
     border: .4rem solid #eee;
     transition: all .1s ease;
