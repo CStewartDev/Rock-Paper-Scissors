@@ -1,6 +1,7 @@
 let compScore = 0;
 let playerScore = 0;
 let rounds = 5;
+
 const SELECTIONS = [
     {
         name: 'ROCK',
@@ -16,34 +17,21 @@ const SELECTIONS = [
     }
 ]
 
-// let validatePlayerSelection = () => {
-//     let valid = 0;
-//     let playerSel;
-//     do {
-//         playerSel = prompt("ROCK,PAPER,SCISSORS?").toUpperCase();
-//         if(playerSel === "ROCK" || playerSel === "PAPER" || playerSel === "SCISSORS") {
-//             valid = 1;
-//             return playerSel
-//         }
-//     } while(valid !== 1);
-// }
-
 let randomSelection = () => {
     let comp = Math.floor(Math.random()*SELECTIONS.length);
     return SELECTIONS[comp]
 }
 
-let yourSelection = () => {
-    const validSelection = validatePlayerSelection();
-    const selection = SELECTIONS.find(selection=> selection.name === validSelection)
+let yourSelection = (key) => {
+    const selection = SELECTIONS.find(selection=> selection.name === key)
     return selection;
 }
 
 let isWinner = (selection,opponentSelection) => selection.beats === opponentSelection.name
 
-let playround = () => {
+let playround = (key) => {
     let computerSelection = randomSelection();
-    let playerSelection = yourSelection();
+    let playerSelection = yourSelection(key);
     const youWin = isWinner(playerSelection,computerSelection)
     const pcWin = isWinner(computerSelection,playerSelection)
     return result(playerSelection,youWin, computerSelection, pcWin)  
@@ -66,17 +54,36 @@ let result = (playerSelection, youWin, computerSelection,pcWin) => {
         ${scoreBoard()}` 
     } else {
         rounds++
-        return "HMM. That aint right. Try again"
+        return ""
     }
 }
 
-let game = () => {
-    for(let i = 0;i<rounds;i++){
-        console.log(playround())
-    }
-    return `The FINAL score is Player:${playerScore} Computer:${compScore}`
+// let game = (key) => {
+//     for(let i = 0;i<rounds;i++){
+//         console.log(playround())
+//     }
+//     return `The FINAL score is Player:${playerScore} Computer:${compScore}`
+// }
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('click');
+  }
+
+function selectionMade(e) {
+    const key = e.target.dataset.key;
+    const btn = document.querySelector(`button[data-key="${key}"]`);
+    const score = document.querySelector('.score');
+    btn.classList.add('click')
+    score.textContent = playround(key);
 }
- console.log(game())
+
+const btns = document.querySelectorAll('.btn');
+btns.forEach(btn=>btn.addEventListener('click',selectionMade));
+btns.forEach(btn=>btn.addEventListener('transitionend',removeTransition));
+
+const score = document.querySelector('.score');
+score.textContent = result();
 
  //Time to make a GUI and clean up some of this behavior. NO MORE PROMPTS!!! YUS!
  //Create element for each rock, paper,scissors

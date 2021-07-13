@@ -76,9 +76,9 @@ select {
 /* Start of CSS, Above is CSS reset from https://piccalil.li/blog/a-modern-css-reset/ */
 
 html {
-    font-size: 10px;
+    font-size: 12px;
     background: rgb(131,58,180);
-    background: linear-gradient(126deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%); 
+    background: linear-gradient(126deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
   }
   
   body,html {
@@ -88,10 +88,17 @@ html {
     color:#eee;
   }
 
+  body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      justify-content:center;
+  }
+
+
 .btns{
     display: flex;
-    flex: 1;
-    min-height: 100vh;
     align-items: center;
     justify-content: center  
 }
@@ -104,22 +111,26 @@ html {
     width: 30rem;
     cursor: pointer;
     border: .4rem solid #eee;
-    transition: all .07s ease;
+    transition: all .05s ease;
     text-align: center;
     background: none;
     text-shadow: 0 0 .5rem black;
 }
 
-.btn:hover {
+/* .btn:hover {
     transform:scale(1.1)
-}
+} */
 
 .click {
-    transform: scale(.9);
-    border-color: darkcyan;
+    transform: scale(1);
+    border-color: rgba(252,176,69,1);
     box-shadow: 0 0 1rem #ffc600;
 }
 
 .scoreboard {
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
 }
