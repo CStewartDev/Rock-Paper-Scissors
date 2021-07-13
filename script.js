@@ -37,33 +37,24 @@ let playround = (key) => {
     return result(playerSelection,youWin, computerSelection, pcWin)  
 } 
 
-let scoreBoard = (isFinal) => `The score is Player:${playerScore} Computer:${compScore}`
+let scoreBoard = () => `The score is Player:${playerScore} Computer:${compScore}`
 
 let result = (playerSelection, youWin, computerSelection,pcWin) => {
-    if(youWin){
-        playerScore++
-        return `WINNER! ${playerSelection.name} Beats ${computerSelection.name}
-        ${scoreBoard()}`
-    } else if (pcWin){
-        compScore++
-        return `LOSER! ${computerSelection.name} Beats ${playerSelection.name}
-        ${scoreBoard()}`
-    } else if (youWin === false && pcWin === false){
-        rounds++;
-        return `Draw. Try again.
-        ${scoreBoard()}` 
-    } else {
-        rounds++
-        return ""
-    }
+        if(youWin){
+            playerScore++
+            return `WINNER! ${playerSelection.name} Beats ${computerSelection.name}
+            ${scoreBoard()}`
+        } else if (pcWin){
+            compScore++
+            return `LOSER! ${computerSelection.name} Beats ${playerSelection.name}
+            ${scoreBoard()}`
+        } else if (youWin === false && pcWin === false){;
+            return `Draw. Try again.
+            ${scoreBoard()}` 
+        } else { return ""
+        }
 }
 
-// let game = (key) => {
-//     for(let i = 0;i<rounds;i++){
-//         console.log(playround())
-//     }
-//     return `The FINAL score is Player:${playerScore} Computer:${compScore}`
-// }
 
 function removeTransition(e) {
     if (e.propertyName !== 'transform') return;
@@ -82,8 +73,6 @@ const btns = document.querySelectorAll('.btn');
 btns.forEach(btn=>btn.addEventListener('click',selectionMade));
 btns.forEach(btn=>btn.addEventListener('transitionend',removeTransition));
 
-const score = document.querySelector('.score');
-score.textContent = result();
 
  //Time to make a GUI and clean up some of this behavior. NO MORE PROMPTS!!! YUS!
  //Create element for each rock, paper,scissors
