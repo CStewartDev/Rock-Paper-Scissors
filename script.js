@@ -1,6 +1,6 @@
 let compScore = 0;
 let playerScore = 0;
-let rounds = 5;
+let final = false;
 
 const SELECTIONS = [
     {
@@ -22,22 +22,15 @@ let randomSelection = () => {
     return SELECTIONS[comp]
 }
 
-let yourSelection = (key) => {
-    const selection = SELECTIONS.find(selection=> selection.name === key)
-    return selection;
-}
-
 let isWinner = (selection,opponentSelection) => selection.beats === opponentSelection.name
 
-let playround = (key) => {
-    let computerSelection = randomSelection();
-    let playerSelection = yourSelection(key);
-    const youWin = isWinner(playerSelection,computerSelection)
-    const pcWin = isWinner(computerSelection,playerSelection)
-    return result(playerSelection,youWin, computerSelection, pcWin)  
-} 
+let scoreBoard = () => {
+ (() => {if(playerScore === 5 || compScore ===5) final = true})()
 
-let scoreBoard = () => `The score is Player:${playerScore} Computer:${compScore}`
+    if(final){
+        return `The final score is Player:${playerScore} Computer:${compScore}`
+    } else return `The score is Player:${playerScore} Computer:${compScore}`
+}
 
 let result = (playerSelection, youWin, computerSelection,pcWin) => {
         if(youWin){
@@ -55,26 +48,36 @@ let result = (playerSelection, youWin, computerSelection,pcWin) => {
         }
 }
 
+const btns = document.querySelectorAll('[data-key]');
+const compSpan = document.querySelector('[data-comp-score]')
+const yourSpan = document.querySelector('[data-your-score]')
+
+btns.forEach(btn => {
+    btn.addEventListener('click', e => {
+        btn.classList.add('click');
+        btn.addEventListener('transitionend',removeTransition);
+        const selectionName = btn.dataset.key;
+        const selection = SELECTIONS.find(selection=> selection.name === selectionName)
+        makeSelection(selection)
+    })
+})
+
 
 function removeTransition(e) {
     if (e.propertyName !== 'transform') return;
     e.target.classList.remove('click');
   }
 
-function selectionMade(e) {
-    const key = e.target.dataset.key;
-    const btn = document.querySelector(`button[data-key="${key}"]`);
-    const score = document.querySelector('.score');
-    btn.classList.add('click')
-    score.textContent = playround(key);
+function makeSelection(selection) {
+    const score = document.querySelector('.score')
+    let computerSelection = randomSelection();
+    const youWin = isWinner(selection,computerSelection)
+    const pcWin = isWinner(computerSelection,selection) 
+    score.textContent = result(selection,youWin, computerSelection, pcWin)
+    compSpan.textContent = compScore;
+    yourSpan.textContent = playerScore;
 }
-
-const btns = document.querySelectorAll('.btn');
-btns.forEach(btn=>btn.addEventListener('click',selectionMade));
-btns.forEach(btn=>btn.addEventListener('transitionend',removeTransition));
-
-
- //Time to make a GUI and clean up some of this behavior. NO MORE PROMPTS!!! YUS!
+//Time to make a GUI and clean up some of this behavior. NO MORE PROMPTS!!! YUS!
  //Create element for each rock, paper,scissors
  // each one can have a data attribute to identify them.
  // add event listeners for player selection

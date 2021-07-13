@@ -111,7 +111,7 @@ html {
     width: 30rem;
     cursor: pointer;
     border: .4rem solid #eee;
-    transition: all .05s ease;
+    transition: all .1s ease;
     text-align: center;
     background: none;
     text-shadow: 0 0 .5rem black;
