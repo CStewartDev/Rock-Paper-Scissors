@@ -13,3 +13,6 @@ I have shaken off a lot of rust in this project. I made my first solution and by
 Overall, i am happy that i continued working on this project after my first attempt. it was basically all hard coded and it was a bit beastly. This one, while still a bit much, does all i need it to. It could probably be refactored further, but again, we will look at it in the future.
 
 ALSO, THE PROMPTS ARE DRIVING ME MAD! ENTER AT YOUR OWN RISK! lol
+
+
+Time to Add the GUI and clean this code up. I noticed a couple of hiccups that i didnt test last time with my code. Lets see how it goes.

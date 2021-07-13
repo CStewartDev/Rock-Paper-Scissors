@@ -16,17 +16,17 @@ const SELECTIONS = [
     }
 ]
 
-let validatePlayerSelection = () => {
-    let valid = 0;
-    let playerSel;
-    do {
-        playerSel = prompt("ROCK,PAPER,SCISSORS?").toUpperCase();
-        if(playerSel === "ROCK" || playerSel === "PAPER" || playerSel === "SCISSORS") {
-            valid = 1;
-            return playerSel
-        }
-    } while(valid !== 1);
-}
+// let validatePlayerSelection = () => {
+//     let valid = 0;
+//     let playerSel;
+//     do {
+//         playerSel = prompt("ROCK,PAPER,SCISSORS?").toUpperCase();
+//         if(playerSel === "ROCK" || playerSel === "PAPER" || playerSel === "SCISSORS") {
+//             valid = 1;
+//             return playerSel
+//         }
+//     } while(valid !== 1);
+// }
 
 let randomSelection = () => {
     let comp = Math.floor(Math.random()*SELECTIONS.length);
