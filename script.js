@@ -42,16 +42,22 @@ let result = (playerSelection, youWin, computerSelection,pcWin) => {
 const btns = document.querySelectorAll('[data-key]');
 const compSpan = document.querySelector('[data-comp-score]')
 const yourSpan = document.querySelector('[data-your-score]')
+const score = document.querySelector('.score')
 
-btns.forEach(btn => {
-    btn.addEventListener('click', e => {
-        btn.classList.add('click');
-        btn.addEventListener('transitionend',removeTransition);
-        const selectionName = btn.dataset.key;
-        const selection = SELECTIONS.find(selection=> selection.name === selectionName)
-        makeSelection(selection)
-    })
-})
+btns.forEach(btn => btn.addEventListener('click', game))
+
+function isGameOver() {
+    if(playerScore === 5 || compScore ===5) final = true;
+}
+
+function game() {
+    if(final) return;
+    this.classList.add('click');
+    this.addEventListener('transitionend',removeTransition);
+    const selectionName = this.dataset.key;
+    const selection = SELECTIONS.find(selection=> selection.name === selectionName)
+    makeSelection(selection)
+}
 
 
 function removeTransition(e) {
@@ -59,21 +65,44 @@ function removeTransition(e) {
     e.target.classList.remove('click');
   }
 
-function makeSelection(selection) {
-    const score = document.querySelector('.score')
+function makeSelection(selection) {    
     let computerSelection = randomSelection();
     const youWin = isWinner(selection,computerSelection);
     const pcWin = isWinner(computerSelection,selection);
     if(youWin) playerScore++
     if(pcWin) compScore++ 
-    (() => {if(playerScore === 5 || compScore ===5) final = true})();
+    isGameOver();
     if(final) {
         score.textContent = finalScore();
-    } else score.textContent = result(selection,youWin, computerSelection, pcWin);
+        const reset = document.createElement('button');
+        reset.classList.add('reset');
+        reset.textContent = "Another Round?"
+        score.appendChild(reset);
+        reset.addEventListener('click',resetGame)
+    } else {
+        score.textContent = result(selection,youWin, computerSelection, pcWin)
+    };
 
     compSpan.textContent = compScore;
     yourSpan.textContent = playerScore;
 }
+
+function updateScore () {
+
+}
+
+
+
+function resetGame () {
+    compScore = 0;
+    playerScore = 0;
+    final = false;
+    compSpan.textContent = compScore;
+    yourSpan.textContent = playerScore;
+    score.textContent = "";
+}
+
+//reset.addEventListener('click',resetGame)
 //Time to make a GUI and clean up some of this behavior. NO MORE PROMPTS!!! YUS!
  //Create element for each rock, paper,scissors
  // each one can have a data attribute to identify them.
@@ -82,3 +111,8 @@ function makeSelection(selection) {
  // show final score after 5 rounds have gone, excluding Draws.
  
 
+//  btn.classList.add('click');
+//  btn.addEventListener('transitionend',removeTransition);
+//  const selectionName = btn.dataset.key;
+//  const selection = SELECTIONS.find(selection=> selection.name === selectionName)
+//  makeSelection(selection)
