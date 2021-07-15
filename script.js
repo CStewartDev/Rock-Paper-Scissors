@@ -1,6 +1,10 @@
 let compScore = 0;
 let playerScore = 0;
 let final = false;
+const btns = document.querySelectorAll('[data-key]');
+const compSpan = document.querySelector('[data-comp-score]');
+const yourSpan = document.querySelector('[data-your-score]');
+const score = document.querySelector('.score');
 
 const SELECTIONS = [
     {
@@ -38,11 +42,6 @@ let result = (playerSelection, youWin, computerSelection,pcWin) => {
         } else { return ""
         }
 }
-
-const btns = document.querySelectorAll('[data-key]');
-const compSpan = document.querySelector('[data-comp-score]')
-const yourSpan = document.querySelector('[data-your-score]')
-const score = document.querySelector('.score')
 
 btns.forEach(btn => btn.addEventListener('click', game))
 
@@ -87,12 +86,6 @@ function makeSelection(selection) {
     yourSpan.textContent = playerScore;
 }
 
-function updateScore () {
-
-}
-
-
-
 function resetGame () {
     compScore = 0;
     playerScore = 0;
@@ -101,18 +94,5 @@ function resetGame () {
     yourSpan.textContent = playerScore;
     score.textContent = "";
 }
-
-//reset.addEventListener('click',resetGame)
-//Time to make a GUI and clean up some of this behavior. NO MORE PROMPTS!!! YUS!
- //Create element for each rock, paper,scissors
- // each one can have a data attribute to identify them.
- // add event listeners for player selection
- // Add a scoreboard to show the matches
- // show final score after 5 rounds have gone, excluding Draws.
  
 
-//  btn.classList.add('click');
-//  btn.addEventListener('transitionend',removeTransition);
-//  const selectionName = btn.dataset.key;
-//  const selection = SELECTIONS.find(selection=> selection.name === selectionName)
-//  makeSelection(selection)

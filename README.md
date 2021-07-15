@@ -1,3 +1,5 @@
+Live link: 
+
 I have shaken off a lot of rust in this project. I made my first solution and by the end of it completely scraped it.
 
 *things to improve*
@@ -12,7 +14,7 @@ I have shaken off a lot of rust in this project. I made my first solution and by
 
 Overall, i am happy that i continued working on this project after my first attempt. it was basically all hard coded and it was a bit beastly. This one, while still a bit much, does all i need it to. It could probably be refactored further, but again, we will look at it in the future.
 
-ALSO, THE PROMPTS ARE DRIVING ME MAD! ENTER AT YOUR OWN RISK! lol
-
 
 Time to Add the GUI and clean this code up. I noticed a couple of hiccups that i didnt test last time with my code. Lets see how it goes.
+
+Well, the site has been cleaned up significantly. I used some logic that makes the prject work nicely. This was a good workout for the coding muscle. Overall, neat, clean. Once i review media queries, i would like to come back and make it a bit more responsive for different screen sizes. That would leave a nice touch
