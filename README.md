@@ -1,4 +1,4 @@
-Live link: 
+Live link: https://cstewartdev.github.io/Rock-Paper-Scissors/
 
 I have shaken off a lot of rust in this project. I made my first solution and by the end of it completely scraped it.
 
